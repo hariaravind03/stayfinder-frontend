@@ -24,7 +24,7 @@ export default function Login() {
       if (!showOtpInput) {
         // First step: Send login request to get OTP
         const response = await axios.post(
-          'http://localhost:5000/api/auth/login',
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
           formData,
           { withCredentials: true }
         );
@@ -36,7 +36,7 @@ export default function Login() {
       } else {
         // Second step: Verify OTP and complete login
         const response = await axios.post(
-          'http://localhost:5000/api/auth/verify-login-otp',
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/verify-login-otp`,
           {
             email: formData.email,
             otp: otp

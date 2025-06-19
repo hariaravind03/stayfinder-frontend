@@ -58,7 +58,7 @@ export default function Listings() {
       if (filters.dateRange.to) params.append('checkOut', filters.dateRange.to.toISOString());
 
       console.log('Fetching listings with params:', params.toString());
-      const response = await axios.get(`http://localhost:5000/api/listings?${params}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings?${params}`);
       console.log('Received listings:', response.data);
       
       setListings(response.data);

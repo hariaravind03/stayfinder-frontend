@@ -18,7 +18,7 @@ export default function MyFavorites() {
   const fetchFavorites = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/api/favorites', {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites`, {
         withCredentials: true,
       });
       setFavoriteListings(response.data);

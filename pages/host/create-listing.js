@@ -46,7 +46,7 @@ export default function CreateListing() {
       });
 
       await axios.post(
-        'http://localhost:5000/api/listings',
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings`,
         formDataToSend,
         {
           withCredentials: true,

@@ -38,7 +38,7 @@ export default function ListingDetail() {
 
   const fetchListing = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/listings/${id}`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings/${id}`);
       setListing(response.data);
       setLoading(false);
     } catch (error) {
@@ -49,7 +49,7 @@ export default function ListingDetail() {
 
   const checkFavoriteStatus = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/favorites', {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites`, {
         withCredentials: true,
       });
       const favorites = response.data;
@@ -63,12 +63,12 @@ export default function ListingDetail() {
   const handleFavoriteToggle = async () => {
     try {
       if (isFavorited) {
-        await axios.delete(`http://localhost:5000/api/favorites/${id}`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/${id}`, {
           withCredentials: true,
         });
         toast.success('Removed from favorites!');
       } else {
-        await axios.put(`http://localhost:5000/api/favorites/${id}`, {}, {
+        await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/favorites/${id}`, {}, {
           withCredentials: true,
         });
         toast.success('Added to favorites!');
@@ -106,7 +106,7 @@ export default function ListingDetail() {
 
     try {
       await axios.post(
-        'http://localhost:5000/api/bookings',
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bookings`,
         {
           listingId: id,
           checkIn: checkIn.toISOString(),
@@ -384,7 +384,7 @@ export default function ListingDetail() {
 // the path was not previously generated.
 export async function getStaticProps({ params }) {
   try {
-    const res = await fetch(`http://localhost:5000/api/listings/${params.id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings/${params.id}`);
     const listing = await res.json();
 
     return {

@@ -16,7 +16,7 @@ export default function Home() {
 
   const fetchFeaturedListings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/listings');
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings`);
       setFeaturedListings(response.data.slice(0,4));
     } catch (error) {
       // Optionally handle error

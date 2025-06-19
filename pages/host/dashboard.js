@@ -19,10 +19,10 @@ export default function HostDashboard() {
 
   const fetchData = async () => {
     try {
-      const listingsRes = await axios.get('http://localhost:5000/api/listings/my-listings', {
+      const listingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings/my-listings`, {
         withCredentials: true
       });
-      const bookingsRes = await axios.get('http://localhost:5000/api/bookings/host-bookings', {
+      const bookingsRes = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bookings/host-bookings`, {
         withCredentials: true
       });
 
@@ -46,7 +46,7 @@ export default function HostDashboard() {
   const handleDeleteListing = async (id) => {
     setDeletingId(id);
     try {
-      await axios.delete(`http://localhost:5000/api/listings/${id}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings/${id}`, {
         withCredentials: true
       });
       toast.success('Listing deleted successfully');
@@ -64,7 +64,7 @@ export default function HostDashboard() {
     try {
       console.log(bookingId, status);
       await axios.patch(
-        `http://localhost:5000/api/bookings/${bookingId}/status`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bookings/${bookingId}/status`,
         { status },
         {
           withCredentials: true
@@ -80,7 +80,7 @@ export default function HostDashboard() {
   const handleCancelApproval = async (bookingId, action) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/bookings/${bookingId}/cancel-approval`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bookings/${bookingId}/cancel-approval`,
         { action },
         { withCredentials: true }
       );

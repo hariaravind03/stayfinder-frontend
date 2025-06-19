@@ -18,7 +18,7 @@ export default function MyBookings() {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/bookings/my-bookings', {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bookings/my-bookings`, {
         withCredentials: true
       });
       setBookings(response.data);
@@ -40,7 +40,7 @@ export default function MyBookings() {
     }
     try {
       await axios.patch(
-        `http://localhost:5000/api/bookings/${cancelModal.bookingId}/cancel-request`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/bookings/${cancelModal.bookingId}/cancel-request`,
         { reason: cancelReason },
         { withCredentials: true }
       );

@@ -22,7 +22,7 @@ export default function BecomeHost() {
 
   const checkUserStatus = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/auth/me', {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`, {
         withCredentials: true
       });
       setUserStatus(response.data);
@@ -39,7 +39,7 @@ export default function BecomeHost() {
     e.preventDefault();
     try {
       await axios.post(
-        'http://localhost:5000/api/users/become-host',
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/become-host`,
         formData,
         {
           withCredentials: true

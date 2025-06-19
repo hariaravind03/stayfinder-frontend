@@ -27,7 +27,7 @@ export default function EditListing() {
 
   const fetchListing = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/listings/${id}`);
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings/${id}`);
       setForm({
         ...res.data,
         price: res.data.price || '',
@@ -77,7 +77,7 @@ export default function EditListing() {
     });
     newImages.forEach((file) => formData.append('images', file));
     try {
-      await axios.put(`http://localhost:5000/api/listings/${id}`, formData, {
+      await axios.put(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/listings/${id}`, formData, {
         withCredentials: true,
         headers: { 'Content-Type': 'multipart/form-data' },
       });
