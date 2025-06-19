@@ -1,0 +1,24 @@
+# For reference only. Use package.json for actual dependency management.
+@radix-ui/react-label
+@radix-ui/react-popover
+@radix-ui/react-slot
+autoprefixer
+axios
+class-variance-authority
+clsx
+date-fns
+js-cookie
+jwt-decode
+lucide-react
+next
+next-themes
+postcss
+react
+react-datepicker
+react-day-picker
+react-dom
+react-hot-toast
+react-icons
+tailwind-merge
+tailwindcss
+tailwindcss-animate 
