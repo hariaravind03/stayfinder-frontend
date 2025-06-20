@@ -24,10 +24,12 @@ export default function Login() {
       if (!showOtpInput) {
         // First step: Send login request to get OTP
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
-          formData,
-
-        );
+  `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
+  formData,
+  {
+    withCredentials: true
+  }
+);
 
         console.log(formData);
         
@@ -38,13 +40,16 @@ export default function Login() {
       } else {
         // Second step: Verify OTP and complete login
         const response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/verify-login-otp`,
-          {
-            email: formData.email,
-            otp: otp
-          },
-          
-        );
+  `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/verify-login-otp`,
+  {
+    email: formData.email,
+    otp: otp
+  },
+  {
+    withCredentials: true
+  }
+);
+
 
         if (response.data.message === 'Login successful') {
           toast.success('Login successful!');
