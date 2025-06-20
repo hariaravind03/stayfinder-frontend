@@ -94,7 +94,7 @@ const DayPicker = ({
     for (let day = 1; day <= daysInMonth; day++) {
       const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
       
-      let dayClasses = "h-10 w-10 rounded-lg flex items-center justify-center text-sm font-medium transition-all duration-200 cursor-pointer hover:scale-105";
+      let dayClasses = "h-8 w-8 sm:h-10 sm:w-10 rounded-lg flex items-center justify-center text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer hover:scale-105";
       
       if (isToday(date)) {
         dayClasses += " ring-2 ring-blue-500 ring-offset-2 bg-blue-50 text-blue-700 font-bold";
@@ -125,9 +125,9 @@ const DayPicker = ({
   };
   
   return (
-    <div className={className}>
+    <div className={"w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl mx-auto p-2 sm:p-4 md:p-6 " + (className || "")}>
       {/* Month Navigation */}
-      <div className="flex items-center justify-between mb-6 px-2">
+      <div className="flex flex-col sm:flex-row items-center justify-between mb-3 sm:mb-6 gap-2 sm:gap-0">
         <button
           onClick={() => navigateMonth(-1)}
           className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -135,8 +135,7 @@ const DayPicker = ({
         >
           <ChevronLeft className="h-5 w-5 text-gray-600" />
         </button>
-        
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1 sm:space-x-2">
           <select 
             value={currentMonth.getMonth()}
             onChange={(e) => {
@@ -144,13 +143,12 @@ const DayPicker = ({
               newMonth.setMonth(parseInt(e.target.value));
               setCurrentMonth(newMonth);
             }}
-            className="text-lg font-semibold bg-transparent border-none outline-none cursor-pointer hover:bg-gray-50 px-2 py-1 rounded"
+            className="text-xs sm:text-base font-semibold bg-transparent border-none outline-none cursor-pointer hover:bg-gray-50 px-1 sm:px-2 py-1 rounded"
           >
             {monthNames.map((month, index) => (
               <option key={index} value={index}>{month}</option>
             ))}
           </select>
-          
           <select 
             value={currentMonth.getFullYear()}
             onChange={(e) => {
@@ -158,14 +156,13 @@ const DayPicker = ({
               newMonth.setFullYear(parseInt(e.target.value));
               setCurrentMonth(newMonth);
             }}
-            className="text-lg font-semibold bg-transparent border-none outline-none cursor-pointer hover:bg-gray-50 px-2 py-1 rounded"
+            className="text-xs sm:text-base font-semibold bg-transparent border-none outline-none cursor-pointer hover:bg-gray-50 px-1 sm:px-2 py-1 rounded"
           >
             {Array.from({ length: (toYear || 2030) - (fromYear || 1900) + 1 }, (_, i) => fromYear + i).map(year => (
               <option key={year} value={year}>{year}</option>
             ))}
           </select>
         </div>
-        
         <button
           onClick={() => navigateMonth(1)}
           className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -174,18 +171,16 @@ const DayPicker = ({
           <ChevronRight className="h-5 w-5 text-gray-600" />
         </button>
       </div>
-      
       {/* Day Headers */}
-      <div className="grid grid-cols-7 gap-1 mb-2">
+      <div className="grid grid-cols-7 gap-0.5 sm:gap-1 mb-1 sm:mb-2 text-xs sm:text-sm">
         {dayNames.map((dayName, index) => (
-          <div key={index} className="h-10 flex items-center justify-center text-xs font-semibold text-gray-500 uppercase tracking-wider">
+          <div key={index} className="h-8 sm:h-10 flex items-center justify-center font-semibold text-gray-500 uppercase tracking-wider">
             {dayName}
           </div>
         ))}
       </div>
-      
       {/* Calendar Grid */}
-      <div className="grid grid-cols-7 gap-1">
+      <div className="grid grid-cols-7 gap-0.5 sm:gap-1 overflow-x-auto">
         {renderDays()}
       </div>
     </div>
@@ -205,7 +200,7 @@ export function Calendar({
   ...props
 }) {
   return (
-    <div className="bg-white rounded-xl shadow-xl border border-gray-200 p-6">
+    <div className="bg-white rounded-xl shadow-xl border border-gray-200 w-full max-w-xs sm:max-w-md md:max-w-lg mx-auto p-2 sm:p-4 md:p-6">
       <DayPicker
         mode={mode}
         selected={selected}
