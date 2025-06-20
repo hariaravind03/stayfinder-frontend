@@ -11,9 +11,13 @@ export default function OTPVerification({ email, onVerificationComplete }) {
     try {
       setIsLoading(true);
       
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/send-otp`, {
-        email
-      });
+      const response = await axios.post(
+  `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/send-otp`,
+  { email },
+  {
+    withCredentials: true
+  }
+);
 
       setIsOtpSent(true);
       toast.success('OTP sent successfully!');
@@ -29,10 +33,17 @@ export default function OTPVerification({ email, onVerificationComplete }) {
     try {
       setIsLoading(true);
       
-      const response = await axios.post('http://localhost:5000/api/auth/verify-otp', {
-        email,
-        otp
-      });
+      const response = await axios.post(
+  `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/verify-otp`,
+  {
+    email,
+    otp
+  },
+  {
+    withCredentials: true  // ✅ important for cookie storage
+  }
+);
+
 
       onVerificationComplete(true);
       toast.success('Email verified successfully!');
