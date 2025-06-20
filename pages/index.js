@@ -77,6 +77,18 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      {/* Footer */}
+      <footer className="w-full bg-white border-t border-gray-200 py-6 mt-8">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2 text-gray-600 text-sm">
+          <div className="font-semibold text-blue-700">StayFinder &copy; {new Date().getFullYear()}</div>
+          <div className="flex gap-4">
+            <a href="/about" className="hover:text-blue-600 transition-colors">About</a>
+            <a href="/contact" className="hover:text-blue-600 transition-colors">Contact</a>
+            <a href="/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 } 
