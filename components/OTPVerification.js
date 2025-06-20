@@ -11,7 +11,7 @@ export default function OTPVerification({ email, onVerificationComplete }) {
     try {
       setIsLoading(true);
       
-      const response = await axios.post('http://localhost:5000/api/auth/send-otp', {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/send-otp`, {
         email
       });
 

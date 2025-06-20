@@ -26,8 +26,10 @@ export default function Login() {
         const response = await axios.post(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
           formData,
-          { withCredentials: true }
+
         );
+
+        console.log(formData);
         
         if (response.data.message === 'OTP sent to your email') {
           setShowOtpInput(true);
@@ -41,7 +43,7 @@ export default function Login() {
             email: formData.email,
             otp: otp
           },
-          { withCredentials: true }
+          
         );
 
         if (response.data.message === 'Login successful') {
