@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { FaPlus, FaEdit, FaTrash, FaCalendarAlt, FaArrowLeft, FaMoneyBillWave, FaTimesCircle } from 'react-icons/fa';
 import BackButton from '../../components/BackButton';
+
 export default function HostDashboard() {
   const router = useRouter();
   const [listings, setListings] = useState([]);
@@ -12,10 +13,30 @@ export default function HostDashboard() {
   const [deletingId, setDeletingId] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
+  const [userStatus, setUserStatus] = useState(null);
+  const [checkingUser, setCheckingUser] = useState(true);
 
   useEffect(() => {
-    fetchData();
+    checkUserStatus();
   }, []);
+
+  const checkUserStatus = async () => {
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/me`, {
+        withCredentials: true
+      });
+      setUserStatus(response.data);
+      if (response.data.role !== 'host') {
+        router.push('/');
+        return;
+      }
+      fetchData();
+    } catch (error) {
+      router.push('/');
+    } finally {
+      setCheckingUser(false);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -102,7 +123,7 @@ export default function HostDashboard() {
     .filter(b => b.status === 'cancelled' && new Date(b.checkIn).getMonth() === currentMonth && new Date(b.checkIn).getFullYear() === currentYear)
     .reduce((sum, b) => sum + (b.totalPrice || 0), 0);
 
-  if (loading) {
+  if (checkingUser || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>

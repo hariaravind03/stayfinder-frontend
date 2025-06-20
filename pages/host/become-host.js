@@ -47,7 +47,7 @@ export default function BecomeHost() {
       );
 
       toast.success('Host request submitted successfully!');
-      router.push('/host/dashboard');
+      router.push('/');
     } catch (error) {
       if (error.response?.status === 401) {
         router.push('/login');
