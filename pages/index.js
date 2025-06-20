@@ -78,12 +78,12 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Enhanced Footer */}
-      <footer className="w-full bg-gradient-to-br from-blue-50 to-pink-50 border-t border-gray-200 mt-8">
+      {/* Professional Footer */}
+      <footer className="w-full bg-gray-50 border-t border-gray-200 mt-8">
         <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           {/* Brand & Tagline */}
           <div className="flex flex-col items-center md:items-start">
-            <span className="text-2xl font-extrabold text-blue-700 tracking-tight">StayFinder</span>
+            <span className="text-2xl font-extrabold text-gray-800 tracking-tight">StayFinder</span>
             <span className="text-sm text-gray-500 mt-1">Find your perfect stay, anywhere.</span>
           </div>
           {/* Navigation Links */}
