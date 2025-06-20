@@ -66,12 +66,18 @@ export default function Register() {
 
     try {
       setIsLoading(true);
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/register`, {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        role: formData.role
-      });
+      const response = await axios.post(
+  `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/register`,
+  {
+    name: formData.name,
+    email: formData.email,
+    password: formData.password,
+    role: formData.role
+  },
+  {
+    withCredentials: true // ✅ Add this line
+  }
+);
 
       toast.success('Registration successful!');
       router.push('/login');
